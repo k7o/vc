@@ -1,0 +1,29 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+- apigw-deployment.yaml
+- issuer-deployment.yaml
+- jaeger-deployment.yaml
+- kafka-ui-deployment.yaml
+- kafka0-deployment.yaml
+- kafka1-deployment.yaml
+- mockas-deployment.yaml
+- mockas2-deployment.yaml
+- mongo-deployment.yaml
+- persistent-deployment.yaml
+- redis-deployment.yaml
+- registry-deployment.yaml
+- ui-deployment.yaml
+- verifier-deployment.yaml
+
+namespace: dc4eu-vc
+
+configMapGenerator:
+- name: config
+  files:
+  - config.yaml
+
+secretGenerator:
+- name: issuer-cert
+  literals:
+  - cert=ICAgICAxCS0tLS0tQkVHSU4gRUMgUFJJVkFURSBLRVktLS0tLQogICAgIDIJTUhjQ0FRRUVJR0hqMC9PYzBFUTRlZlV6cW8zZDZtT1VUMGQzbXoyQ3FvYUJzbTkyYWJWQm9Bb0dDQ3FHU000OQogICAgIDMJQXdFSG9VUURRZ0FFUnlYbTk0YitqOEVXc2ZhMjUwRXJPbFBCYzN2MHMxNUt1WVQ4S3oxcVQyZ05CbEJ6SEl4UgogICAgIDQJVUNhUEQ1VnB3WE1QK2hLcitJT1Vha3dFQjM0RkszbHFiQT09CiAgICAgNQktLS0tLUVORCBFQyBQUklWQVRFIEtFWS0tLS0tCg==

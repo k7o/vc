@@ -1,3 +1,24 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    kompose.cmd: kompose convert
+    kompose.version: 1.34.0 (cbf2835db)
+  labels:
+    io.kompose.service: registry
+  name: registry
+spec:
+  ports:
+    - name: "http"
+      port: 8080
+      targetPort: 8080
+    - name: "grpc"
+      port: 8090
+      targetPort: 8090
+  selector:
+    io.kompose.service: registry
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -28,6 +49,11 @@ spec:
               value: config.yaml
           image: docker.sunet.se/dc4eu/registry:latest
           name: vc-dev-registry
+          ports:
+            - containerPort: 8080
+              protocol: TCP
+            - containerPort: 8090
+              protocol: TCP
           volumeMounts:
             - mountPath: /config.yaml
               name: config

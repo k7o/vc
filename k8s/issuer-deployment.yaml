@@ -1,15 +1,23 @@
+---
 apiVersion: v1
-kind: PersistentVolumeClaim
+kind: Service
 metadata:
+  annotations:
+    kompose.cmd: kompose convert
+    kompose.version: 1.34.0 (cbf2835db)
   labels:
-    io.kompose.service: issuer-cert-claim
-  name: issuer-cert-claim
+    io.kompose.service: issuer
+  name: issuer
 spec:
-  accessModes:
-    - ReadOnlyMany
-  resources:
-    requests:
-      storage: 10Mi
+  ports:
+    - name: "http"
+      port: 8080
+      targetPort: 8080
+    - name: "grpc"
+      port: 8090
+      targetPort: 8090
+  selector:
+    io.kompose.service: issuer
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -26,7 +34,7 @@ spec:
     matchLabels:
       io.kompose.service: issuer
   strategy:
-    type: Recreate
+    type: RollingUpdate
   template:
     metadata:
       annotations:
@@ -41,6 +49,11 @@ spec:
               value: config.yaml
           image: docker.sunet.se/dc4eu/issuer:latest
           name: vc-dev-issuer
+          ports:
+            - containerPort: 8080
+              protocol: TCP
+            - containerPort: 8090
+              protocol: TCP
           volumeMounts:
             - mountPath: /config.yaml
               name: config
@@ -62,6 +75,5 @@ spec:
         - name: issuer-log-volume
           emptyDir: {}
         - name: issuer-cert-volume
-          persistentVolumeClaim:
-            claimName: issuer-cert-claim
-            readOnly: true
+          secret:
+            secretName: issuer-cert
