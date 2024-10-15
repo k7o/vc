@@ -19,19 +19,6 @@ spec:
   selector:
     io.kompose.service: verifier
 ---
-apiVersion: v1
-kind: PersistentVolumeClaim
-metadata:
-  labels:
-    io.kompose.service: verifier-claim
-  name: verifier-claim
-spec:
-  accessModes:
-    - ReadOnlyMany
-  resources:
-    requests:
-      storage: 100Mi
----
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -69,7 +56,7 @@ spec:
               protocol: TCP
           volumeMounts:
             - mountPath: /cert
-              name: verifier-volume
+              name: verifier-cert-volume
               readOnly: true
             - mountPath: /config.yaml
               name: config
@@ -77,13 +64,13 @@ spec:
               subPath: config.yaml
       restartPolicy: Always
       volumes:
-        - name: verifier-volume
-          persistentVolumeClaim:
-            claimName: verifier-claim
-            readOnly: true
         - configMap:
             items:
               - key: config.yaml
                 path: config.yaml
-            name: verifier-cm
+            name: config
           name: config
+        - name: verifier-cert-volume
+          emptyDir: {}
+          # secret:
+          #   secretName: verifier-cert

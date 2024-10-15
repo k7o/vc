@@ -65,5 +65,5 @@ spec:
             items:
               - key: config.yaml
                 path: config.yaml
-            name: registry-cm
+            name: config
           name: config

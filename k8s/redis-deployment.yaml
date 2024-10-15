@@ -9,9 +9,9 @@ metadata:
   name: redis
 spec:
   ports:
-    - name: "6373"
-      port: 6373
-      targetPort: 6373
+    - name: "6379"
+      port: 6379
+      targetPort: 6379
   selector:
     io.kompose.service: redis
 ---
@@ -29,7 +29,7 @@ spec:
       storage: 100Mi
 ---
 apiVersion: apps/v1
-kind: Deployment
+kind: StatefulSet
 metadata:
   annotations:
     kompose.cmd: kompose convert
@@ -42,8 +42,6 @@ spec:
   selector:
     matchLabels:
       io.kompose.service: redis
-  strategy:
-    type: RollingUpdate
   template:
     metadata:
       annotations:
@@ -60,7 +58,7 @@ spec:
           image: redis:alpine
           name: vc-dev-redis
           ports:
-            - containerPort: 6373
+            - containerPort: 6379
               protocol: TCP
           volumeMounts:
             - mountPath: /data

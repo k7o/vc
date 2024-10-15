@@ -60,5 +60,5 @@ spec:
             items:
               - key: config.yaml
                 path: config.yaml
-            name: persistent-cm
+            name: config
           name: config

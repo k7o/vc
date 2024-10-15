@@ -22,17 +22,17 @@ apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   labels:
-    io.kompose.service: kafka0-claim
-  name: kafka0-claim
+    io.kompose.service: kraft0-volume
+  name: kraft0-volume
 spec:
   accessModes:
     - ReadWriteOnce
   resources:
     requests:
-      storage: 100Mi
+      storage: 100Mi    
 ---
 apiVersion: apps/v1
-kind: Deployment
+kind: StatefulSet
 metadata:
   annotations:
     kompose.cmd: kompose convert
@@ -45,8 +45,6 @@ spec:
   selector:
     matchLabels:
       io.kompose.service: kafka0
-  strategy:
-    type: RollingUpdate
   template:
     metadata:
       annotations:
@@ -93,4 +91,4 @@ spec:
       volumes:
         - name: kafka0-volume
           persistentVolumeClaim:
-            claimName: kafka0-claim
+            claimName: kraft0-volume

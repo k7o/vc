@@ -49,6 +49,10 @@ DOCKER_TAG_UI 			:= docker.sunet.se/dc4eu/ui:$(VERSION)
 
 build: proto build-verifier build-registry build-persistent build-mockas build-apigw build-ui
 
+build-issuer:
+	$(info Building issuer)
+	CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -v -o ./bin/$(NAME)_issuer ${LDFLAGS} ./cmd/issuer/main.go
+
 build-verifier:
 	$(info Building verifier)
 	CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -v -o ./bin/$(NAME)_verifier ${LDFLAGS} ./cmd/verifier/main.go

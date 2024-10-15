@@ -1,5 +1,6 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
+
 resources:
 - apigw-deployment.yaml
 - issuer-deployment.yaml
@@ -25,5 +26,13 @@ configMapGenerator:
 
 secretGenerator:
 - name: issuer-cert
-  literals:
-  - cert=ICAgICAxCS0tLS0tQkVHSU4gRUMgUFJJVkFURSBLRVktLS0tLQogICAgIDIJTUhjQ0FRRUVJR0hqMC9PYzBFUTRlZlV6cW8zZDZtT1VUMGQzbXoyQ3FvYUJzbTkyYWJWQm9Bb0dDQ3FHU000OQogICAgIDMJQXdFSG9VUURRZ0FFUnlYbTk0YitqOEVXc2ZhMjUwRXJPbFBCYzN2MHMxNUt1WVQ4S3oxcVQyZ05CbEJ6SEl4UgogICAgIDQJVUNhUEQ1VnB3WE1QK2hLcitJT1Vha3dFQjM0RkszbHFiQT09CiAgICAgNQktLS0tLUVORCBFQyBQUklWQVRFIEtFWS0tLS0tCg==
+  files:
+  - secrets/private_ec256.pem
+# - name: verifier-cert
+#   files:
+#   - secrets/private_ec256.pem
+
+images:
+- name: docker.sunet.se/dc4eu/mockas:latest
+  newName: localhost:5001/dc4eu/mockas
+  newTag: latest

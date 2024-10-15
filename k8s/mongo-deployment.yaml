@@ -29,7 +29,7 @@ spec:
       storage: 100Mi
 ---
 apiVersion: apps/v1
-kind: Deployment
+kind: StatefulSet
 metadata:
   annotations:
     kompose.cmd: kompose convert
@@ -42,8 +42,6 @@ spec:
   selector:
     matchLabels:
       io.kompose.service: mongo
-  strategy:
-    type: RollingUpdate
   template:
     metadata:
       annotations:

@@ -64,16 +64,20 @@ spec:
             - mountPath: /private_ec256.pem
               name: issuer-cert-volume
               readOnly: true
+              subPath: private_ec256.pem
       restartPolicy: Always
       volumes:
         - configMap:
             items:
               - key: config.yaml
                 path: config.yaml
-            name: issuer-config
+            name: config
           name: config
         - name: issuer-log-volume
           emptyDir: {}
         - name: issuer-cert-volume
           secret:
             secretName: issuer-cert
+            items:
+              - key: private_ec256.pem
+                path: private_ec256.pem

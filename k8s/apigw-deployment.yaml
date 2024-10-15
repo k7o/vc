@@ -62,7 +62,7 @@ spec:
             items:
               - key: config.yaml
                 path: config.yaml
-            name: apigw-config
+            name: config
           name: config
         - name: apigw-volume
           emptyDir: {}
