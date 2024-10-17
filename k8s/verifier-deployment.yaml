@@ -39,7 +39,7 @@ spec:
             - name: VC_CONFIG_YAML
               value: config.yaml
           image: docker.sunet.se/dc4eu/verifier:latest
-          name: vc-dev-verifier
+          name: verifier
           ports:
             - containerPort: 8080
               protocol: TCP

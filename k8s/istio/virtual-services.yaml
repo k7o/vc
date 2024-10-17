@@ -1,0 +1,42 @@
+apiVersion: networking.istio.io/v1beta1
+kind: VirtualService
+metadata:
+  name:  dc4eu-vs
+spec:
+  hosts:
+  - dc4eu.kind.local
+  gateways:
+  - patch
+  http:
+  - match:
+    - uri:
+        prefix: /apigw/
+    route:
+    - destination:
+        host: apigw.dc4eu-vc.svc.cluster.local
+        port: 
+          number: 8080    
+    rewrite:
+      uri: "/"
+  - match:
+    - uri:
+        prefix: /ui/
+    route:
+    - destination:
+        host: ui.dc4eu-vc.svc.cluster.local
+        port: 
+          number: 8080    
+    rewrite:
+      uri: "/"
+    headers:
+      response:
+        add:
+          Location: "/ui"
+  - match:
+    - uri:
+        prefix: /kafka-ui
+    route:
+    - destination:
+        host: kafka-ui.dc4eu-vc.svc.cluster.local
+        port: 
+          number: 8080    

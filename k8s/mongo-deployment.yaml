@@ -42,7 +42,7 @@ spec:
     spec:
       containers:
         - image: mongo:4.0.10
-          name: vc-dev-mongo
+          name: mongo
           ports:
             - containerPort: 27017
               protocol: TCP

@@ -39,7 +39,7 @@ spec:
             - name: COLLECTOR_OTLP_ENABLED
               value: "true"
           image: jaegertracing/all-in-one:latest
-          name: vc-dev-jaeger
+          name: jaeger
           ports:
             - containerPort: 16686
               protocol: TCP

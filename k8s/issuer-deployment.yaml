@@ -39,7 +39,7 @@ spec:
             - name: VC_CONFIG_YAML
               value: config.yaml
           image: docker.sunet.se/dc4eu/issuer:latest
-          name: vc-dev-issuer
+          name: issuer
           ports:
             - containerPort: 8080
               protocol: TCP

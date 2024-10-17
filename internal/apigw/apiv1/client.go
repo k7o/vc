@@ -13,7 +13,7 @@ import (
 
 //	@title		Datastore API
 //	@version	2.8
-//	@BasePath	/api/v1
+//	@BasePath	/apigw/api/v1
 
 // Client holds the public api object
 type Client struct {

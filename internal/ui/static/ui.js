@@ -1,5 +1,11 @@
-const baseUrl = window.location.origin;
+const origin = window.location.origin;
+const pathname = window.location.pathname.replace(/\/$/, ''); // Remove trailing slash if any
 
+// Combine origin and pathname to form the baseUrl
+const baseUrl = `${origin}${pathname}`;
+
+// Example usage
+console.log(baseUrl); // Outputs something like "https://www.example.com/path"
 const getElementById = (id) => document.getElementById(id);
 
 const removeElementById = (id) => {

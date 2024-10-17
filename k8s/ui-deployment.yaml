@@ -36,7 +36,7 @@ spec:
             - name: VC_CONFIG_YAML
               value: config.yaml
           image: docker.sunet.se/dc4eu/ui:latest
-          name: vc-dev-ui
+          name: ui
           ports:
             - containerPort: 8080
               protocol: TCP
@@ -45,6 +45,7 @@ spec:
               name: config
               readOnly: true
               subPath: config.yaml
+          imagePullPolicy: Always
       restartPolicy: Always
       volumes:
         - configMap:

@@ -1,0 +1,18 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+- virtual-services.yaml
+
+patches:
+  - target:
+      kind: VirtualService
+      name: dc4eu-vs
+    patch: |-
+      - op: add
+        path: /spec/hosts
+        value:
+          - dc4eu.kind.local
+      - op: add
+        path: /spec/gateways
+        value:
+          - ns-d-all-addon-istio-ingress-01/default-gateway-ingress

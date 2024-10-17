@@ -46,7 +46,7 @@ spec:
             - --appendonly
             - "yes"
           image: redis:alpine
-          name: vc-dev-redis
+          name: redis
           ports:
             - containerPort: 6379
               protocol: TCP

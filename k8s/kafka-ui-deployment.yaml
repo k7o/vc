@@ -29,6 +29,8 @@ spec:
     spec:
       containers:
         - env:
+            - name: SERVER_SERVLET_CONTEXT_PATH
+              value: /kafka-ui
             - name: AUTH_TYPE
               value: LOGIN_FORM
             - name: DYNAMIC_CONFIG_ENABLED
@@ -46,7 +48,7 @@ spec:
             - name: SPRING_SECURITY_USER_PASSWORD
               value: admin123
           image: provectuslabs/kafka-ui:latest
-          name: vc-dev-kafka-ui
+          name: kafka-ui
           ports:
             - containerPort: 8080
               protocol: TCP

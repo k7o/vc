@@ -39,7 +39,7 @@ spec:
             - name: VC_CONFIG_YAML
               value: config.yaml
           image: docker.sunet.se/dc4eu/registry:latest
-          name: vc-dev-registry
+          name: registry
           ports:
             - containerPort: 8080
               protocol: TCP

@@ -69,7 +69,7 @@ spec:
             - name: KAFKA_KRAFT_CLUSTER_ID
               value: 550e8400-e29b-42d4-a716-446655440000
           image: bitnami/kafka:latest
-          name: vc-dev-kafka0
+          name: kafka0
           ports:
             - containerPort: 9092
               protocol: TCP

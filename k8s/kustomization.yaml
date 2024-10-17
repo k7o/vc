@@ -2,6 +2,7 @@ apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 
 resources:
+- istio
 - apigw-deployment.yaml
 - issuer-deployment.yaml
 - jaeger-deployment.yaml
@@ -35,4 +36,10 @@ secretGenerator:
 images:
 - name: docker.sunet.se/dc4eu/mockas:latest
   newName: localhost:5001/dc4eu/mockas
+  newTag: latest
+- name: docker.sunet.se/dc4eu/apigw:latest
+  newName: localhost:5001/dc4eu/apigw
+  newTag: latest
+- name: docker.sunet.se/dc4eu/ui:latest
+  newName: localhost:5001/dc4eu/ui
   newTag: latest

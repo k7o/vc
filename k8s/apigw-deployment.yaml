@@ -36,7 +36,7 @@ spec:
             - name: VC_CONFIG_YAML
               value: config.yaml
           image: docker.sunet.se/dc4eu/apigw:latest
-          name: vc-dev-apigw
+          name: apigw
           ports:
             - containerPort: 8080
               protocol: TCP          
@@ -47,6 +47,7 @@ spec:
               subPath: config.yaml
             - mountPath: /var/log/sunet
               name: apigw-volume
+          imagePullPolicy: Always
       restartPolicy: Always
       volumes:
         - configMap:
